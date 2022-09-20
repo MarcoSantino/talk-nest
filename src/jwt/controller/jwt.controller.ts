@@ -3,7 +3,8 @@ https://docs.nestjs.com/controllers#controllers
 */
 
 import { Controller, Get, Headers } from '@nestjs/common';
-import { ApiHeader, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ResponseDecryptToken } from '../model/response-decrypt.model';
 import { JwtService } from '../services/jwt.service';
 
 @Controller('auth')
@@ -18,6 +19,9 @@ export class JwtController {
 
   @ApiTags('JWT')
   @ApiHeader({ name: 'Authorization', required: true })
+  @ApiResponse({
+    type: ResponseDecryptToken,
+  })
   @Get('decrypt')
   decryptToken(@Headers() header): { [key: string]: string } {
     return this.jwt.verifyToken(header.authorization.replace('Bearer ', ''));
