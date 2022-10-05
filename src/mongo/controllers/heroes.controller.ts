@@ -6,6 +6,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Hero } from '../interfaces/hero';
 import { RequestSaveHero } from '../model/request-save-hero';
+import { ResponseRetrieveHeroes } from '../model/response-retrieve-heroes';
 import { HeroesDocument } from '../schemas/heroes.schema';
 import { HeroesService } from '../services/heroes.service';
 
@@ -15,7 +16,7 @@ export class HeroesController {
 
   @ApiTags('Mongo')
   @ApiResponse({
-    type: RequestSaveHero,
+    type: ResponseRetrieveHeroes,
     isArray: true,
   })
   @Get()
